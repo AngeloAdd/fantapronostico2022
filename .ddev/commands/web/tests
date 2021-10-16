@@ -1,0 +1,32 @@
+#!/bin/bash
+
+## Description: Run phpunit tests
+## Usage: tests [option]
+## Example: ddev tests list\nddev tests version\nddev tests <test-name>
+
+if [ $# -eq 0 ] ; then
+  ./vendor/bin/phpunit
+  exit
+fi
+
+case $1 in
+  list)
+    ./vendor/bin/phpunit --list-tests
+  ;;
+  $*)
+    command=$(./vendor/bin/phpunit --help)
+    if ! [[ "$command" =~ --"$*" ]] ; then
+      ./vendor/bin/phpunit --filter="$*"
+      exit
+    else
+      if [[ $(./vendor/bin/phpunit --"$*") =~ .*'is ambiguous'.* ]] ; then
+        option=''
+        echo "The option is ambiguous"
+        echo 'Witch option did you mean?'
+        read -r option
+        ./vendor/bin/phpunit --"$option"
+        else
+        ./vendor/bin/phpunit --"$*"
+      fi
+    fi
+esac
