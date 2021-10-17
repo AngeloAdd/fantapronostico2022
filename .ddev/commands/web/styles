@@ -5,6 +5,7 @@
 ## Example: ddev stl\nddev stl -f version\nddev stl --fix <test-name>
 
 if [ $# -eq 0 ] ; then
+  vendor/bin/phpmd app,bootstrap,config,database,routes,tests text phpmd.xml
   vendor/bin/phpcs -p -s -d memory_limit=1G &&
   composer sniff
   exit
