@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": ">=8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
@@ -21,6 +21,7 @@
         "nunomaduro/collision": "^5.10",
         "phpmd/phpmd": "^2.10",
         "phpunit/phpunit": "^9.5.8",
+        "povils/phpmnd": "^2.4",
         "squizlabs/php_codesniffer": "*"
     },
     "autoload": {
@@ -50,7 +51,7 @@
             "@php artisan key:generate --ansi"
         ],
         "sniff": [
-            "./vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots"
+            "./vendor/bin/php-cs-fixer fix -vvv --no-interaction --dry-run --diff --stop-on-violation --show-progress=dots"
         ],
         "lint": [
             "./vendor/bin/php-cs-fixer fix -vvv --show-progress=dots"
