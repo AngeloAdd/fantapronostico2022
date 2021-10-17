@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Run all styles or selected one
+## Usage: stl [option]
+## Example: ddev stl\nddev stl -f version\nddev stl --fix <test-name>
+
+composer lint
