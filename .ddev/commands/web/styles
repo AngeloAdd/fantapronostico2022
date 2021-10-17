@@ -4,4 +4,15 @@
 ## Usage: stl [option]
 ## Example: ddev stl\nddev stl -f version\nddev stl --fix <test-name>
 
-composer lint
+if [ $# -eq 0 ] ; then
+  vendor/bin/phpcs -p -s -d memory_limit=1G &&
+  composer sniff
+  exit
+fi
+
+if [ $@ == -f ] || [ $@ == --fix ] ; then
+  composer lint
+  exit
+fi
+
+
