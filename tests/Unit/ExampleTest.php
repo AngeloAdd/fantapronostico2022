@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Tests\Unit;
 
@@ -10,8 +10,10 @@ class ExampleTest extends TestCase
      * A basic test example.
      *
      * @return void
+     *
+     * @test
      */
-    public function test_example()
+    public function example(): void
     {
         $this->assertTrue(true);
     }
