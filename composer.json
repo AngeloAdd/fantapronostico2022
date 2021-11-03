@@ -19,10 +19,14 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
+        "nunomaduro/larastan": "^1.0",
+        "nunomaduro/phpinsights": "^2.0",
         "phpmd/phpmd": "^2.10",
         "phpunit/phpunit": "^9.5.8",
         "povils/phpmnd": "^2.4",
-        "squizlabs/php_codesniffer": "*"
+        "psalm/plugin-laravel": "^1.5",
+        "squizlabs/php_codesniffer": "*",
+        "vimeo/psalm": "^4.11"
     },
     "autoload": {
         "psr-4": {
