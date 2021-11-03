@@ -11,10 +11,14 @@ if [ $# -eq 0 ] ; then
   vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --extensions=all --allow-array-mapping routes &&
   vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --extensions=all --allow-array-mapping tests &&
   composer sniff
+  vendor/bin/phpcs -p -s -d memory_limit=1G &&
+  vendor/bin/phpstan analyse --no-interaction --memory-limit=1G &&
+  vendor/bin/psalm &&
+  vendor/bin/phpinsights --no-interaction --disable-security-check --format=github-action
   exit
 fi
 
-if [ $@ == -f ] || [ $@ == --fix ] ; then
+if [[ $* == -f ]] || [[ $* == --fix ]] ; then
   composer lint
   exit
 fi
