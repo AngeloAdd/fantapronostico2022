@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Class RouteServiceProvider.
  */
-class RouteServiceProvider extends ServiceProvider
+final class RouteServiceProvider extends ServiceProvider
 {
     /**
      * The path to the "home" route for your application.
@@ -48,14 +48,15 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(
             function (): void {
                 Route::prefix('api')
-                    ->middleware('api')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/api.php'));
+                       ->middleware('api')
+                       ->namespace($this->namespace)
+                       ->group(base_path('routes/api.php'));
 
                 Route::middleware('web')
-                    ->namespace($this->namespace)
-                    ->group(base_path('routes/web.php'));
-            });
+                     ->namespace($this->namespace)
+                     ->group(base_path('routes/web.php'));
+            }
+        );
     }
 
     /**
