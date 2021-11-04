@@ -2,18 +2,24 @@
 
 namespace Database\Seeders;
 
+use App\Models\Database\v1\Team;
 use App\Models\Database\v1\User;
 use Illuminate\Database\Seeder;
 
 /**
  * Class DatabaseSeeder.
  */
-class DatabaseSeeder extends Seeder
+final class DatabaseSeeder extends Seeder
 {
     /**
      * @var int
      */
-    private const USER_NUMBER = 10;
+    private const TEAMS_NUMBER = 24;
+
+    /**
+     * @var int
+     */
+    private const USERS_NUMBER = 10;
 
     /**
      * Seed the application's database.
@@ -22,7 +28,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(self::USER_NUMBER)
+        User::factory(self::USERS_NUMBER)
+            ->create();
+
+        Team::factory(self::TEAMS_NUMBER)
             ->create();
     }
 }
