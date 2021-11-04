@@ -2,10 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Models\Database\v1\User;
 use Illuminate\Database\Seeder;
 
+/**
+ * Class DatabaseSeeder.
+ */
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * @var int
+     */
+    private const USER_NUMBER = 10;
+
     /**
      * Seed the application's database.
      *
@@ -13,6 +22,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        User::factory(self::USER_NUMBER)
+            ->create();
     }
 }

@@ -23,10 +23,14 @@ class UserTest extends TestCase
     public function it_can_be_persisted(): void
     {
         /** @var User $user */
-        $user = User::factory()->make();
+        $user = User::factory()
+                    ->create();
 
-        $user->save();
+        $user->refresh();
 
-        $this->assertNotNull($user->id);
+        /** @var User $fetchedUser */
+        $fetchedUser = User::find($user->id);
+
+        $this->assertNotNull($fetchedUser->id);
     }
 }
