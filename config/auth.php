@@ -1,7 +1,8 @@
-<?php
+<?php declare(strict_types=1);
+
+use App\Models\Database\v1\User;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -62,7 +63,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
 
         // 'users' => [
@@ -107,5 +108,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

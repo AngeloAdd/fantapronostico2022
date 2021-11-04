@@ -1,0 +1,26 @@
+#!/bin/bash
+
+## Description: Run all styles or selected one
+## Usage: stl [option]
+## Example: ddev stl\nddev stl -f version\nddev stl --fix <test-name>
+
+if [ $# -eq 0 ] ; then
+  vendor/bin/phpmd app,bootstrap,config,database,routes,tests text phpmd.xml &&
+  vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --extensions=all --allow-array-mapping --exclude=Orchid app &&
+  vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --allow-array-mapping database &&
+  vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --extensions=all --allow-array-mapping routes &&
+  vendor/bin/phpmnd --hint --progress --non-zero-exit-on-violation --extensions=all --allow-array-mapping tests &&
+  composer sniff
+  vendor/bin/phpcs -p -s -d memory_limit=1G &&
+  vendor/bin/phpstan analyse --no-interaction --memory-limit=1G &&
+  vendor/bin/psalm &&
+  vendor/bin/phpinsights --no-interaction --disable-security-check --format=github-action
+  exit
+fi
+
+if [[ $* == -f ]] || [[ $* == --fix ]] ; then
+  composer lint
+  exit
+fi
+
+

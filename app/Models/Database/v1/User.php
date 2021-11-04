@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models\Database\v1;
 
@@ -10,9 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * Class User.
  */
-class User extends Authenticatable
+final class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that should be cast.
