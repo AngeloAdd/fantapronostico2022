@@ -14,7 +14,7 @@ final class DatabaseSeeder extends Seeder
     /**
      * @var int
      */
-    private const TEAMS_NUMBER = 24;
+    public const TEAMS_NUMBER = 24;
 
     /**
      * @var int
@@ -33,5 +33,11 @@ final class DatabaseSeeder extends Seeder
 
         Team::factory(self::TEAMS_NUMBER)
             ->create();
+
+        $this->call(
+            [
+                PlayerSeeder::class,
+            ]
+        );
     }
 }
