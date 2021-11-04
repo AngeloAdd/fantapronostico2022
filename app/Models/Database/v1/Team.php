@@ -5,8 +5,10 @@ namespace App\Models\Database\v1;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\Database\v1\TeamFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -29,8 +31,29 @@ use Illuminate\Support\Carbon;
  * @method static Builder|Team whereShortName($value)
  * @method static Builder|Team whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property-read Collection|Player[] $players
+ * @property-read int|null $players_count
  */
 class Team extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'name',
+        'short_name',
+        'flag',
+    ];
+
+    /**
+     * @return HasMany
+     */
+    public function players(): HasMany
+    {
+        return $this->hasMany(Player::class);
+    }
 }
