@@ -5,4 +5,4 @@
 ## Example: ddev boot:db
 
 php artisan migrate:fresh
-php artisan seed:db
+php artisan db:seed
