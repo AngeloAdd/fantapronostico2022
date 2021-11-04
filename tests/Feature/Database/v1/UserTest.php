@@ -26,6 +26,11 @@ class UserTest extends TestCase
         $user = User::factory()
                     ->create();
 
-        $this->assertNotNull($user->id());
+        $user->refresh();
+
+        /** @var User $fetchedUser */
+        $fetchedUser = User::find($user->id);
+
+        $this->assertNotNull($fetchedUser->id);
     }
 }
