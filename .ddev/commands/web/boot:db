@@ -1,0 +1,9 @@
+#!/bin/bash
+
+## Description: Boot db for project
+## Usage: boot:db
+## Example: ddev boot:db
+
+mysql -uroot -proot -hdb -e "CREATE DATABASE IF NOT EXISTS db_test; GRANT ALL ON db_test.* TO 'db'@'%';"
+php artisan migrate:fresh
+php artisan seed:db

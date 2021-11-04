@@ -18,9 +18,16 @@ if [ $# -eq 0 ] ; then
   exit
 fi
 
-if [[ $* == -f ]] || [[ $* == --fix ]] ; then
-  composer lint
-  exit
-fi
-
-
+case $1 in
+  -f|--fix)
+    composer lint
+    exit
+  ;;
+  -s|--stan)
+    vendor/bin/phpstan analyse --no-interaction --memory-limit=1G
+    exit
+  ;;
+  -i|--ins)
+    vendor/bin/phpinsights --no-interaction --disable-security-check --format=github-action
+    exit
+esac
