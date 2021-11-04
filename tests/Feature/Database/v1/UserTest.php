@@ -3,7 +3,6 @@
 namespace Tests\Feature\Database\v1;
 
 use App\Models\Database\v1\User;
-use Tests\TestCase;
 
 /**
  * Class UserTest.
@@ -12,6 +11,11 @@ use Tests\TestCase;
  */
 class UserTest extends TestCase
 {
+    /**
+     * @var int
+     */
+    private const USERS_NUMBER = 10;
+
     /**
      * Test if User can be persisted.
      *
@@ -22,15 +26,27 @@ class UserTest extends TestCase
      */
     public function it_can_be_persisted(): void
     {
+        /** @var User[] $users */
+        $users = User::factory(self::USERS_NUMBER)
+                     ->create();
+
+        $this->assertDatabaseCount(
+            (new User())->getTable(),
+            self::USERS_NUMBER
+        );
+
         /** @var User $user */
-        $user = User::factory()
-                    ->create();
+        foreach ($users as $user) {
+            $user->refresh();
 
-        $user->refresh();
+            $this->assertNotNull($user->id);
+            $this->assertIsInt($user->id);
 
-        /** @var User $fetchedUser */
-        $fetchedUser = User::find($user->id);
+            $this->assertNotNull($user->name);
+            $this->assertIsString($user->name);
 
-        $this->assertNotNull($fetchedUser->id);
+            $this->assertNotNull($user->email);
+            $this->assertIsString($user->email);
+        }
     }
 }
