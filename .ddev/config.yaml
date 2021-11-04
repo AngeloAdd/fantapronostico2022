@@ -15,6 +15,10 @@ composer_version: ""
 omit_containers: [ dba ]
 web_environment:
     - PHP_IDE_CONFIG=serverName=${DDEV_PROJECT}
+hooks:
+    post-start:
+        -   exec: mysql -uroot -proot -hdb -e "CREATE DATABASE IF NOT EXISTS db_test; GRANT ALL ON db_test.* TO 'db'@'%';"
+fail_on_hook_fail: true
 host_db_port: "50565"
 
 # This config.yaml was created with ddev version v1.17.7
